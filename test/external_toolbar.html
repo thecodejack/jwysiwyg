@@ -9,13 +9,22 @@
 	<![endif]-->
 	<!--[if IE 8]> 
 	<![endif]-->
-	<script src="../lib/jquery1.5.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../lib/jquery1.8.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../src/jquery.wysiwyg.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../src/controls/default.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	//<![CDATA[
 		$(document).ready(function(){
-			$('#editor, #editor2').wysiwyg({toolbar:"#toolbar"});
+			var wysObj=null;
+			$('.editor').on({
+				click: function(e){
+					wysObj=$(this).wysiwyg({toolbar:"#toolbar"});
+				},
+				blur: function(e){
+					wysObj.destroy();
+				}
+			});
+			//$('#editor, #editor2').wysiwyg({toolbar:"#toolbar"});
 		});
 	//]]>
 	</script>
@@ -26,13 +35,13 @@
 	</style>
 </head>
 <body>
-	<div id="container">
+	<div id="container" class="wysiwyg">
 		<ul id="toolbar"></ul>
 		<div>
-			<textarea id="editor"></textarea>
+			<textarea id="editor" class="editor"></textarea>
 		</div>
 		<div>
-			<textarea id="editor2"></textarea>
+			<textarea id="editor2" class="editor"></textarea>
 		</div>
 	</div>
 </body>
